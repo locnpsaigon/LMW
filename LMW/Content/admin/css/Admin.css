@@ -1,0 +1,18 @@
+﻿.treeview-menu > li {
+  margin-left: 20px !important;
+}
+
+.breadcrumb {
+    float: none !important;
+    position: relative !important;
+    top: 0px !important;
+    padding: 4px 10px !important;
+}
+
+.content-header > .breadcrumb > li > a {
+    color:#0084CD !important;
+}
+
+.form-control {
+    font-size: inherit !important;
+}

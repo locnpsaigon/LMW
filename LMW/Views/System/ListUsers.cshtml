@@ -1,0 +1,249 @@
+﻿@model LMW.Models.Admin.ListUserModel
+
+@{
+    ViewBag.Title = "Tài khoản";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @*<h1>
+        @ViewBag.Title
+        <small>Preview</small>
+    </h1>*@
+    <ol class="breadcrumb clearfix">
+        <li><a href="/Admin"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-warning">
+                <div class="box-header">
+                    @*<h3 class="box-title">Danh sách tài khoản </h3>*@
+                    <div class="form-inline">
+                        <div class="btn-group">
+                            @Html.EditorFor(model => model.Filter, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập từ khóa tìm kiếm", @style = "width:280px;" } })
+                            <span id="searchclear" class="glyphicon glyphicon-remove-circle"></span>
+                        </div>
+
+                        @Html.HiddenFor(model => model.Pager.CurrentPage)
+                        <a href="javascript:search()" class="btn btn-primary">Tra cứu</a>
+                        <a href="/System/CreateUser" class="btn btn-success"><i class="fa fa-plus"></i></a>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr class="bg-info">
+                                <th>STT</th>
+                                <th>Tên đăng nhập</th>
+                                <th>Họ tên</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Trạng thái</th>
+                                <th>Ngày tạo</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                if (Model != null && Model.Items != null)
+                                {
+                                    var idx = 0;
+                                    foreach (var item in Model.Items)
+                                    {
+                                        idx++;
+                                        var stt = (Model.Pager.CurrentPage - 1) * Model.Pager.PageSize + idx;
+
+                                        <tr>
+                                            <td class="text-center">@stt</td>
+                                            <td>@item.UserName</td>
+                                            <td>@item.FullName</td>
+                                            <td>@item.Phone</td>
+                                            <td>@item.Email</td>
+                                            @if (item.IsActive)
+                                            {
+                                                <td class="text-info">Đang hoạt động</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="text-danger">Đang khóa</td>
+                                            }
+                                            <td>@item.CreateDate.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>
+                                                <a href="/System/EditUser/@item.UserId" class="btn btn-xs btn-primary">Sửa</a>
+                                                <a href="javascript:deleteUser(@item.UserId, '@item.UserName')" class="btn btn-xs btn-danger">Xóa</a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                    if (idx == 0)
+                                    {
+                                        <tr>
+                                            <td class="text-center" colspan="8">Không có tài khoản nào</td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td class="text-center" colspan="8">Không có tài khoản nào</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                        @*<tfoot>
+                                <tr>
+                                    <th>Rendering engine</th>
+                                    <th>Browser</th>
+                                    <th>Platform(s)</th>
+                                    <th>Engine version</th>
+                                    <th>CSS grade</th>
+                                </tr>
+                            </tfoot>*@
+                    </table>
+                    <!--Paging-->
+                    <div class="row">
+                        <div class="col-sm-5"></div>
+                        <div class="col-sm-7">
+                            <div class="dataTables_paginate paging_simple_numbers text-right" id="example2_paginate">
+                                <ul class="pagination">
+                                    @{
+                                        if (Model != null && Model.Pager != null && Model.Pager.TotalPages > 1)
+                                        {
+                                            <li class="paginate_button previous" id="example2_previous"><a href="javascript:navigatePage(1)" aria-controls="example2" data-dt-idx="0" tabindex="0"><i class="fa fa-angle-double-left"></i></a></li>
+                                            <li class="paginate_button previous" id="example2_previous"><a href="javascript:navigatePage(@(Model.Pager.CurrentPage - 1))" aria-controls="example2" data-dt-idx="1" tabindex="0"><i class="fa fa-angle-left"></i></a></li>
+                                            var idxTab = 1;
+                                            for (int page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                            {
+                                                idxTab++;
+
+                                                if (page == Model.Pager.CurrentPage)
+                                                {
+                                                    <li class="paginate_button active"><a href="javascript:navigatePage(@page)" aria-controls="example2" data-dt-idx="@idxTab" tabindex="0">@page</a></li>
+                                                }
+                                                else
+                                                {
+                                                    <li class="paginate_button"><a href="javascript:navigatePage(@page)" aria-controls="example2" data-dt-idx="@idxTab" tabindex="0">@page</a></li>
+                                                }
+                                            }
+                                            <li class="paginate_button previous" id="example2_previous"><a href="javascript:navigatePage(@(Model.Pager.CurrentPage + 1))" aria-controls="example2" data-dt-idx="@(Model.Pager.PageSize - 1)" tabindex="0"><i class="fa fa-angle-right"></i></a></li>
+                                            <li class="paginate_button previous" id="example2_previous"><a href="javascript:navigatePage(@(Model.Pager.TotalPages))" aria-controls="example2" data-dt-idx="@(Model.Pager.PageSize)" tabindex="0"><i class="fa fa-angle-double-right"></i></a></li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.Paging -->
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<!-- Modal HTML -->
+<div id="confirmDeleteModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to save changes you made to document before closing?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btn-delete">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        #Filter {
+            width: 200px;
+        }
+
+        #searchclear {
+            position: absolute;
+            right: 5px;
+            top: 0;
+            bottom: 0;
+            height: 14px;
+            margin: auto;
+            font-size: 14px;
+            cursor: pointer;
+            color: #ccc;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+
+        $(document).ready(function () {
+            $("#searchclear").click(function () {
+                $("#Filter").val('');
+                search();
+            });
+        })
+
+        function search() {
+            var filter = $('#Filter').val();
+            var url = '/System/ListUsers?filter=' + encodeURIComponent(filter);
+            window.location.replace(url);
+        }
+
+        function navigatePage(page) {
+            var filter = $('#Filter').val();
+            var url = '/System/ListUsers?filter=' + encodeURIComponent(filter) + '&page=' + page;
+            window.location.replace(url);
+        }
+
+        function deleteUser(id, name) {
+            // Show delete user confirm dialog
+            $('#confirmDeleteModal').modal('show');
+            $('.modal-title').html('Cảnh báo');
+            $('.modal-body').html('<p>Bạn chắc chắn muốn xóa tài khoản <strong>' + name + '</strong>?</p>');
+            $('#btn-delete').off('click').click(function () {
+                // ajax delete user
+                $('.modal-body').html('<p><img src="/Content/images/ajax-loader.gif" /> Đang xóa tài khoản....</p>');
+                $.ajax({
+                    url: '/System/DeleteUser/' + id,
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        if (data.Success) {
+
+                            $('#confirmDeleteModal').modal('hide');
+
+                            var filter = $('#Filter').val();
+                            var page = $('#Pager_CurrentPage').val();
+                            var url = '/System/ListUsers?filter=' + encodeURIComponent(filter) + '&page=' + page;
+                            window.location.replace(url);
+                        } else {
+                            $('.modal-body').html('<p class="text-danger">' + data.Message + '</p>');
+                        }
+                    },
+                    error: function (xhr) {
+                        $('.modal-body').html('<p class="text-danger">' + xhr.responseText + '</p>');
+                    }
+                });
+            })
+        }
+
+    </script>
+}

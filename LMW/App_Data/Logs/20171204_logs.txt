@@ -1,0 +1,16 @@
+---------------------------------------
+2017-12-04 23:18:33
+Login phone number = 090841682 fail, wrong phone number
+---------------------------------------
+---------------------------------------
+2017-12-04 23:39:26
+Customer controller - register: 
+{
+  "fullname": "NGUYEN PHUOC LOC",
+  "phone": "090841682",
+  "password": "123456aA@",
+  "email": "locnp.saigon@gmail.com"
+}
+ReturnCode: 0
+ReturnMessageĐăng ký thành công
+---------------------------------------

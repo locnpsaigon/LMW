@@ -1,0 +1,231 @@
+﻿@model LMW.Models.Admin.ListServiceModel
+@{
+    ViewBag.Title = "Dịch vụ";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <ol class="breadcrumb clearfix">
+        <li><i class="fa fa-cubes"></i> <a href="/Service/ListServiceGroups">Nhóm dịch vụ</a></li>
+        <li class="active"><span>@Model.groupName</span></li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-warning">
+                <div class="box-header">
+                    <div class="form-inline">
+                        <div class="btn-group">
+                            @Html.HiddenFor(model => model.Pager.CurrentPage)
+                            @Html.HiddenFor(model => model.groupId)
+                            @Html.EditorFor(model => model.Filter, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập từ khóa tìm kiếm", @style = "width:280px;" } })
+                            <span id="searchclear" class="glyphicon glyphicon-remove-circle"></span>
+                        </div>
+                        <a href="javascript:search()" class="btn btn-primary">Tra cứu</a>
+                        <a href="javascript:create()" class="btn btn-success"><i class="fa fa-plus"></i></a>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <table id="example2" class="table table-bordered">
+                        <thead>
+                            <tr class="bg-info">
+                                <th>STT</th>
+                                <th>Icon</th>
+                                <th>Tên dịch vụ</th>
+                                <th>Mô tả</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                if (Model != null && Model.Items != null)
+                                {
+                                    var idx = 0;
+                                    foreach (var item in Model.Items)
+                                    {
+                                        idx++;
+                                        var stt = (Model.Pager.CurrentPage - 1) * Model.Pager.PageSize + idx;
+
+                                        <tr>
+                                            <td class="text-center">@stt</td>
+                                            <td><img src="@item.iconURL" height="45" /></td>
+                                            <td><a href="/Service/ListServiceDetails?serviceId=@item.serviceId">@item.serviceName</a></td>
+                                            <td>@item.description</td>
+                                            <td>
+                                                <a href="/Service/EditService/@item.serviceId" class="btn btn-xs btn-primary">Sửa</a>
+                                                <a href="javascript:deleteService(@item.serviceId, '@item.serviceName')" class="btn btn-xs btn-danger">Xóa</a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                    if (idx == 0)
+                                    {
+                                        <tr>
+                                            <td class="text-center" colspan="5">Không có dịch vụ nào</td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td class="text-center" colspan="5">Không có dịch vụ nào</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    <!--Paging-->
+                    <div class="row">
+                        <div class="col-sm-5"></div>
+                        <div class="col-sm-7">
+                            <div class="dataTables_paginate paging_simple_numbers text-right" id="example2_paginate">
+                                <ul class="pagination">
+                                    @{
+                                        if (Model != null && Model.Pager != null && Model.Pager.TotalPages > 1)
+                                        {
+                                            <li class="paginate_button previous" id="example2_previous"><a href="javascript:navigatePage(1)" aria-controls="example2" data-dt-idx="0" tabindex="0"><i class="fa fa-angle-double-left"></i></a></li>
+                                            <li class="paginate_button previous" id="example2_previous"><a href="javascript:navigatePage(@(Model.Pager.CurrentPage - 1))" aria-controls="example2" data-dt-idx="1" tabindex="0"><i class="fa fa-angle-left"></i></a></li>
+                                            var idxTab = 1;
+                                            for (int page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                            {
+                                                idxTab++;
+
+                                                if (page == Model.Pager.CurrentPage)
+                                                {
+                                                    <li class="paginate_button active"><a href="javascript:navigatePage(@page)" aria-controls="example2" data-dt-idx="@idxTab" tabindex="0">@page</a></li>
+                                                }
+                                                else
+                                                {
+                                                    <li class="paginate_button"><a href="javascript:navigatePage(@page)" aria-controls="example2" data-dt-idx="@idxTab" tabindex="0">@page</a></li>
+                                                }
+                                            }
+                                            <li class="paginate_button previous" id="example2_previous"><a href="javascript:navigatePage(@(Model.Pager.CurrentPage + 1))" aria-controls="example2" data-dt-idx="@(Model.Pager.PageSize - 1)" tabindex="0"><i class="fa fa-angle-right"></i></a></li>
+                                            <li class="paginate_button previous" id="example2_previous"><a href="javascript:navigatePage(@(Model.Pager.TotalPages))" aria-controls="example2" data-dt-idx="@(Model.Pager.PageSize)" tabindex="0"><i class="fa fa-angle-double-right"></i></a></li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.Paging -->
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<!-- Modal HTML -->
+<div id="confirmDeleteModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to save changes you made to document before closing?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btn-delete">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        #Filter {
+            width: 200px;
+        }
+
+        #searchclear {
+            position: absolute;
+            right: 5px;
+            top: 0;
+            bottom: 0;
+            height: 14px;
+            margin: auto;
+            font-size: 14px;
+            cursor: pointer;
+            color: #ccc;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+
+        $(document).ready(function () {
+            $('#searchclear').click(function () {
+                $('#Filter').val('');
+                search();
+            });
+        })
+
+        function search() {
+            var filter = $('#Filter').val();
+            var groupId = $('#groupId').val();
+            var url = '/Service/ListServices?filter=' + encodeURIComponent(filter) + '&groupId=' + groupId;
+            window.location.replace(url);
+        }
+
+        function create() {
+            var groupId = $('#groupId').val();
+            var url = '/Service/CreateService?&groupId=' + groupId;
+            window.location.replace(url);
+        }
+
+        function navigatePage(page) {
+            var filter = $('#Filter').val();
+            var groupId = $('#groupId').val();
+            var url = '/Service/ListServices?filter=' + encodeURIComponent(filter) + '&groupId=' + groupId + '&page=' + page;
+            window.location.replace(url);
+        }
+
+        function deleteService(id, name) {
+            // Show delete user confirm dialog
+            $('#confirmDeleteModal').modal('show');
+            $('.modal-title').html('Cảnh báo');
+            $('.modal-body').html('<p>Bạn chắc chắn muốn xóa dịch vụ #' + name + ' bao gồm chi tiết dịch vụ thuộc dịch vụ này?</p>');
+            $('#btn-delete').off('click').click(function () {
+                // ajax delete user
+                $('.modal-body').html('<p><img src="/Content/images/ajax-loader.gif" /> Đang xóa dịch vụ....</p>');
+                $.ajax({
+                    url: '/Service/DeleteService/' + id,
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        if (data.Success) {
+
+                            $('#confirmDeleteModal').modal('hide');
+
+                            var filter = $('#Filter').val();
+                            var groupId = $('#groupId').val();
+                            var page = $('#Pager_CurrentPage').val();
+                            var url = '/Service/ListServices?filter=' + encodeURIComponent(filter) + '&groupId=' + groupId + '&page=' + page;
+                            window.location.replace(url);
+                        } else {
+                            $('.modal-body').html('<p class="text-danger">' + data.Message + '</p>');
+                        }
+                    },
+                    error: function (xhr) {
+                        $('.modal-body').html('<p class="text-danger">' + xhr.responseText + '</p>');
+                    }
+                });
+            })
+        }
+
+    </script>
+}

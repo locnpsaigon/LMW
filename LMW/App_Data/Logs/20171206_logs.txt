@@ -1,0 +1,157 @@
+---------------------------------------
+2017-12-06 00:46:24
+
+Response: System.ArgumentException: Accessed JArray values with invalid key value: "groupId". Array position index expected.
+   at Newtonsoft.Json.Linq.JArray.get_Item(Object key)
+   at Newtonsoft.Json.Linq.JToken.Value[T](Object key)
+   at LMW.Controllers.Api.OrderController.save(JObject json) in Y:\Projects\Personal\LMW\LMW\Controllers\Api\OrderController.cs:line 45
+---------------------------------------
+---------------------------------------
+2017-12-06 03:17:55
+CarService controller - getAllCarServiceGroups: System.InvalidOperationException: The specified cast from a materialized 'System.String' type to the 'System.Int32' type is not valid.
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at LMW.Controllers.Api.CarServiceController.getAllCarServiceGroups() in Y:\Projects\Personal\LMW\LMW\Controllers\Api\CarServiceController.cs:line 36
+---------------------------------------
+---------------------------------------
+2017-12-06 03:18:38
+CarService controller - getAllCarServiceGroups: System.InvalidOperationException: The specified cast from a materialized 'System.String' type to the 'System.Int32' type is not valid.
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at LMW.Controllers.Api.CarServiceController.getAllCarServiceGroups() in Y:\Projects\Personal\LMW\LMW\Controllers\Api\CarServiceController.cs:line 36
+---------------------------------------
+---------------------------------------
+2017-12-06 11:57:38
+Create order:
+{
+  "address": "",
+  "fullname": "NGUYEN PHUOC LOC",
+  "note": "",
+  "phone": "0909841682",
+  "serviceBookings": [
+    {
+      "bookType": 0,
+      "details": [
+        {
+          "groupId": 1,
+          "groupName": "Vệ sinh",
+          "itemId": 1,
+          "itemName": "Vệ sinh ghế da",
+          "price": 150000,
+          "priceOriginal": 150000,
+          "serviceId": 1,
+          "serviceName": "Gói vệ sinh nội thất xe 4 chỗ",
+          "unit": "cái"
+        },
+        {
+          "groupId": 1,
+          "groupName": "Vệ sinh",
+          "itemId": 2,
+          "itemName": "Vệ sinh ghế nỉ",
+          "price": 180000,
+          "priceOriginal": 180000,
+          "serviceId": 1,
+          "serviceName": "Gói vệ sinh nội thất xe 4 chỗ",
+          "unit": "cái"
+        },
+        {
+          "groupId": 1,
+          "groupName": "Vệ sinh",
+          "itemId": 3,
+          "itemName": "Vệ sinh ghế nhựa taplo",
+          "price": 80000,
+          "priceOriginal": 100000,
+          "serviceId": 1,
+          "serviceName": "Gói vệ sinh nội thất xe 4 chỗ",
+          "unit": "cái"
+        },
+        {
+          "groupId": 1,
+          "groupName": "Vệ sinh",
+          "itemId": 4,
+          "itemName": "Vệ sinh trần sàn xe hơi",
+          "price": 180000,
+          "priceOriginal": 200000,
+          "serviceId": 1,
+          "serviceName": "Gói vệ sinh nội thất xe 4 chỗ",
+          "unit": "cái"
+        }
+      ],
+      "discountAmount": 40000,
+      "groupId": 1,
+      "groupName": "Vệ sinh",
+      "paymentAmount": 550000,
+      "serviceId": 1,
+      "serviceName": "Gói vệ sinh nội thất xe 4 chỗ",
+      "totalAmount": 590000
+    },
+    {
+      "bookType": 0,
+      "details": [
+        {
+          "groupId": 1,
+          "groupName": "Vệ sinh",
+          "itemId": 5,
+          "itemName": "Vệ sinh ghế da",
+          "price": 1700000,
+          "priceOriginal": 200000,
+          "serviceId": 2,
+          "serviceName": "Gói vệ sinh nội thất xe 7 chỗ",
+          "unit": "cái"
+        },
+        {
+          "groupId": 1,
+          "groupName": "Vệ sinh",
+          "itemId": 6,
+          "itemName": "Vệ sinh ghế nỉ",
+          "price": 240000,
+          "priceOriginal": 250000,
+          "serviceId": 2,
+          "serviceName": "Gói vệ sinh nội thất xe 7 chỗ",
+          "unit": "cái"
+        },
+        {
+          "groupId": 1,
+          "groupName": "Vệ sinh",
+          "itemId": 7,
+          "itemName": "Vệ sinh ghế nhựa taplo",
+          "price": 150000,
+          "priceOriginal": 150000,
+          "serviceId": 2,
+          "serviceName": "Gói vệ sinh nội thất xe 7 chỗ",
+          "unit": "cái"
+        },
+        {
+          "groupId": 1,
+          "groupName": "Vệ sinh",
+          "itemId": 8,
+          "itemName": "Vệ sinh trần sàn xe hơi",
+          "price": 230000,
+          "priceOriginal": 250000,
+          "serviceId": 2,
+          "serviceName": "Gói vệ sinh nội thất xe 7 chỗ",
+          "unit": "cái"
+        }
+      ],
+      "discountAmount": 30000,
+      "groupId": 1,
+      "groupName": "Vệ sinh",
+      "paymentAmount": 2290000,
+      "serviceId": 2,
+      "serviceName": "Gói vệ sinh nội thất xe 7 chỗ",
+      "totalAmount": 2320000
+    }
+  ]
+}
+Response: success
+---------------------------------------

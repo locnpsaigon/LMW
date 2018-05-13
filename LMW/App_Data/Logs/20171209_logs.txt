@@ -1,0 +1,50 @@
+---------------------------------------
+2017-12-09 23:23:01
+CustomerController - resetPassword: System.Net.Mail.SmtpException: The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.5.1 Authentication Required. Learn more at
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at LMW.Libs.Emailer.sendmail(String toEmail, String toName, String subject, String body) in Y:\Projects\Personal\LMW\LMW\Libs\Emailer.cs:line 40
+   at LMW.Controllers.Api.CustomerController.resetPassword(JObject json) in Y:\Projects\Personal\LMW\LMW\Controllers\Api\CustomerController.cs:line 264
+---------------------------------------
+---------------------------------------
+2017-12-09 23:26:09
+CustomerController - resetPassword: System.Net.Mail.SmtpException: The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.5.1 Authentication Required. Learn more at
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at LMW.Libs.Emailer.sendmail(String toEmail, String toName, String subject, String body) in Y:\Projects\Personal\LMW\LMW\Libs\Emailer.cs:line 40
+   at LMW.Controllers.Api.CustomerController.resetPassword(JObject json) in Y:\Projects\Personal\LMW\LMW\Controllers\Api\CustomerController.cs:line 264
+---------------------------------------
+---------------------------------------
+2017-12-09 23:30:48
+CustomerController - resetPassword: System.Net.Mail.SmtpException: The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.5.1 Authentication Required. Learn more at
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at LMW.Libs.Emailer.sendmail(String toEmail, String toName, String subject, String body) in Y:\Projects\Personal\LMW\LMW\Libs\Emailer.cs:line 40
+   at LMW.Controllers.Api.CustomerController.resetPassword(JObject json) in Y:\Projects\Personal\LMW\LMW\Controllers\Api\CustomerController.cs:line 264
+---------------------------------------
+---------------------------------------
+2017-12-09 23:34:36
+CustomerController - resetPassword: System.Net.Mail.SmtpException: The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.5.1 Authentication Required. Learn more at
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at LMW.Libs.Emailer.sendmail(String toEmail, String toName, String subject, String body) in Y:\Projects\Personal\LMW\LMW\Libs\Emailer.cs:line 40
+   at LMW.Controllers.Api.CustomerController.resetPassword(JObject json) in Y:\Projects\Personal\LMW\LMW\Controllers\Api\CustomerController.cs:line 264
+---------------------------------------
+---------------------------------------
+2017-12-09 23:35:19
+CustomerController - resetPassword: System.Net.Mail.SmtpException: The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.5.1 Authentication Required. Learn more at
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at LMW.Libs.Emailer.sendmail(String toEmail, String toName, String subject, String body) in Y:\Projects\Personal\LMW\LMW\Libs\Emailer.cs:line 40
+   at LMW.Controllers.Api.CustomerController.resetPassword(JObject json) in Y:\Projects\Personal\LMW\LMW\Controllers\Api\CustomerController.cs:line 264
+---------------------------------------

@@ -1,0 +1,95 @@
+﻿@model LMW.Models.Admin.EditServiceDetailsModel
+
+@{
+    ViewBag.Title = "Cập nhật chi tiết dịch vụ";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <ol class="breadcrumb clearfix">
+            <li><i class="fa fa-cubes"></i> <a href="/Service/ListServiceGroups">Nhóm dịch vụ</a></li>
+            <li><a href="/Service/ListServices?groupId=@Model.groupId">@Model.groupName</a></li>
+            <li><a href="/Service/ListServiceDetails?serviceId=@Model.serviceId">@Model.serviceName</a></li>
+            <li class="active">Thêm chi tiết dịch vụ</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Nhập chi tiết dịch vụ</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.itemId)
+                    @Html.HiddenFor(model => model.groupId)
+                    @Html.HiddenFor(model => model.groupName)
+                    @Html.HiddenFor(model => model.serviceId)
+                    @Html.HiddenFor(model => model.serviceName)
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tên sản phẩm</label>
+                            @Html.EditorFor(model => model.itemName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.itemName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Đơn vị tính</label>
+                            @Html.EditorFor(model => model.unit, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.unit, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Giá</label>
+                            @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Nguyên giá</label>
+                            @Html.EditorFor(model => model.priceOriginal, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.priceOriginal, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <div class="form-group">
+                    <input type="submit" value="Cập nhật" class="btn btn-success" style="width: 120px;" />
+                    <input type="reset" value="Nhập lại" class="btn btn-default" style="width: 120px;" />
+                    <a href="javascript:window.history.back();" class="btn btn-default" style="width: 120px;">Trở về</a>
+                </div>
+            </div>
+        </div>
+        <!-- /.box -->
+    </section>
+    <!-- /.content -->
+}
+
+@section Scripts {
+    <script type="text/javascript" src="~/Scripts/bower_components/jquery-number/jquery.number.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            // Number input formats
+            $('#price').number(true, 0);
+            $('#priceOriginal').number(true, 0);
+        })
+
+    </script>
+}
+
+

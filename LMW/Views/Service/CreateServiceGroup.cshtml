@@ -1,0 +1,108 @@
+﻿@model LMW.Models.Admin.CreateServiceGroupModel
+
+@{
+    ViewBag.Title = "Tạo nhóm dịch vụ";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <ol class="breadcrumb clearfix">
+            <li><i class="fa fa-cubes"></i> <a href="/Service/ListServiceGroups">Nhóm dịch vụ</a></li>
+            <li class="active"><span>Thêm nhóm dịch vụ</span></li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Nhập thông tin nhóm dịch vụ</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nhóm dịch vụ</label>
+                            @Html.EditorFor(model => model.groupName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.groupName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Đường dẫn icon</label>
+                            @Html.EditorFor(model => model.iconURL, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.iconURL, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <img id="icon-preview" height="45" />
+                        </div>
+                        <div class="form-group">
+                            <label>Mô tả ngắn gọn</label>
+                            @Html.TextAreaFor(model => model.description, new { @class = "form-control", @rows = "4", @placeholder = "Mô tả ngắn gọn" })
+                            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Mô tả chi tiết</label>
+                            @Html.TextAreaFor(model => model.fullDescription, new { @class = "form-control textarea", @rows = "10", @placeholder = "Mô tả chi tiết" })
+                            @Html.ValidationMessageFor(model => model.fullDescription, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <div class="form-group">
+                    <input type="submit" value="Lưu thông tin" class="btn btn-success" style="width: 120px;" />
+                    <input type="reset" value="Nhập lại" class="btn btn-default" style="width: 120px;" />
+                    <a href="javascript:window.history.back();" class="btn btn-default" style="width: 120px;">Trở về</a>
+                </div>
+            </div>
+        </div>
+        <!-- /.box -->
+    </section>
+    <!-- /.content -->
+}
+
+@section Styles {
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="~/Scripts/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+}
+
+@section Scripts {
+    <!-- CK Editor -->
+    <script src="~/Scripts/bower_components/ckeditor/ckeditor.js"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="~/Scripts/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <script>
+
+        $(function () {
+            // Replace the <textarea id="editor1"> with a CKEditor
+            // instance, using default configuration.
+            // CKEDITOR.replace('fullDescription')
+            //bootstrap WYSIHTML5 - text editor
+            $('.textarea').wysihtml5()
+        })
+
+        $(document).ready(function () {
+            $('#iconURL').change(function () {
+                var iconURL = $('#iconURL').val();
+                $('#icon-preview').attr('src', iconURL);
+            });
+        })
+
+    </script>
+}
